@@ -104,13 +104,41 @@
                                 </constraints>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="206" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="72.5" y="500" width="240" height="20.5"/>
+                                <rect key="frame" x="72.5" y="500" width="212" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <constraints>
-                                    <constraint id="1678" firstItem="206" firstAttribute="width" constant="240"/>
+                                    <constraint id="2688" firstItem="206" firstAttribute="height" constant="20.5"/>
+                                    <constraint id="2689" firstItem="206" firstAttribute="width" constant="212"/>
+                                    <constraint id="2696" firstItem="206" firstAttribute="height" constant="47"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="2688"/>
+                                    </mask>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2688"/>
+                                        <exclude reference="2696"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="2688"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="2696"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="2696"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1041" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="71.5" y="293.5" width="93" height="20"/>
@@ -157,6 +185,8 @@
                             <constraint id="1722" firstItem="197" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-130"/>
                             <constraint id="1785" firstItem="1041" firstAttribute="leading" secondItem="197" secondAttribute="trailing" constant="20"/>
                             <constraint id="1786" firstItem="8bC-Xf-vdC" firstAttribute="centerY" secondItem="1041" secondAttribute="centerY" constant="103"/>
+                            <constraint id="2697" firstItem="206" firstAttribute="leading" secondItem="197" secondAttribute="leading" constant="2"/>
+                            <constraint id="2698" firstItem="206" firstAttribute="top" secondItem="197" secondAttribute="bottom" constant="14"/>
                         </constraints>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
@@ -164,6 +194,8 @@
                                 <include reference="1655"/>
                                 <include reference="1657"/>
                                 <include reference="1656"/>
+                                <include reference="1677"/>
+                                <include reference="1676"/>
                             </mask>
                         </variation>
                         <variation key="default">
@@ -176,6 +208,10 @@
                                 <exclude reference="1657"/>
                                 <exclude reference="1785"/>
                                 <exclude reference="1786"/>
+                                <exclude reference="1677"/>
+                                <exclude reference="1676"/>
+                                <exclude reference="2697"/>
+                                <exclude reference="2698"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -184,6 +220,8 @@
                                 <include reference="1655"/>
                                 <include reference="1657"/>
                                 <include reference="1656"/>
+                                <include reference="1677"/>
+                                <include reference="1676"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
@@ -192,6 +230,8 @@
                                 <include reference="1722"/>
                                 <include reference="1785"/>
                                 <include reference="1786"/>
+                                <include reference="2697"/>
+                                <include reference="2698"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -200,6 +240,8 @@
                                 <include reference="1722"/>
                                 <include reference="1785"/>
                                 <include reference="1786"/>
+                                <include reference="2697"/>
+                                <include reference="2698"/>
                             </mask>
                         </variation>
                     </view>

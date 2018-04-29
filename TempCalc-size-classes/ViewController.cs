@@ -65,19 +65,21 @@ namespace TempCalcsizeclasses
             {
                 FahrenheitField.ResignFirstResponder();
                 HumidityField.ResignFirstResponder();
+
+                if (FahrenheitField.Text == String.Empty)
+                    FahrenheitField.Text = "0";
+
+                if (HumidityField.Text == String.Empty)
+                    HumidityField.Text = "0";
             }));
 
             HumidityField.EditingDidEnd += (sender, e) =>
             {
-                if (HumidityField.Text == String.Empty)
-                    HumidityField.Text = "0";
                 compute(sender, e);
             };
 
             FahrenheitField.EditingDidEnd += (sender, e) =>
             {
-                if (FahrenheitField.Text == String.Empty)
-                    FahrenheitField.Text = "0";
                 compute(sender, e);
             };
 
