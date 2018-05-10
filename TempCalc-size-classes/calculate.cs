@@ -20,38 +20,35 @@ namespace TempCalcsizeclasses
                 return fDegrees;
         }
 
-        public static double getHeatIndex(double fehrenheit, double humidity)
+        public static double getHeatIndex(double fTemp, double humidity)
         {
-            //equation:
-            //http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml
-            double index = 0.5 * (fehrenheit + 61 + ((fehrenheit - 68) * 1.2))
-                         + (humidity * 0.094);
 
-            if (index < 80)
-                return index;
+			if (fTemp < 80)
+				return fTemp;
+			//equation:
+			//http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml
+			double index = 0.5 * (fTemp + 61.0 + ((fTemp - 68.0) * 1.2) 
+			                      + (humidity * 0.094));
+                                  
+			if(index >= 80)
+					index = -42.379 + (2.04901523 * fTemp)
+                         + (10.14333127 * humidity)
+                         - (0.22475541 * fTemp * humidity)
+                         - (.00683783 * fTemp * fTemp)
+                         - (.05481717 * humidity * humidity)
+                         + (.00122874 * fTemp * fTemp * humidity)
+                         + (.00085282 * fTemp * humidity * humidity)
+                         - (.00000199 * fTemp * fTemp * humidity * humidity);
+			
+			if (humidity < .13 && fTemp > 80 && fTemp < 112)
+				index -= ((13 - humidity) / 4) * Math.Sqrt((17 - Math.Abs(fTemp - 95)) / 17);
 
-            else
-                index = -42.379 + (2.04901523 * fehrenheit) + (10.14333127 * humidity)
-                         - (0.22475541 * fehrenheit * humidity) 
-                         - (6.83783 * Math.Pow(10, -3) * Math.Pow(fehrenheit, 2))
-                         - (5.481717 * Math.Pow(10, -2)  * Math.Pow(humidity, 2))
-                         + (1.22874 * Math.Pow(10, -3) * Math.Pow(fehrenheit, 2) * humidity)
-                         + (8.5282 * Math.Pow(10, -4) * fehrenheit * Math.Pow(humidity, 2))
-                         - (1.99 * Math.Pow(10, -6) * Math.Pow(fehrenheit, 2) * Math.Pow(humidity, 2));
-
-            //make adjustments based on temp and humidity
-            //humidity has to be less than 13% and temp is
-            //between 80 and 112
-            if(humidity < .13 && fehrenheit > 80 && fehrenheit < 112)
-            {
-                index -= ((13 - humidity) / 4)
-                    * Math.Sqrt((17 - Math.Abs(fehrenheit - 95)) / 17);
-            }
+			else if (humidity > .85 && fTemp > 80 && fTemp < 87)
+				index += ((humidity - 85) / 10) * ((87 - fTemp) / 5);
 
 
-            else if(humidity > .85 && fehrenheit > 80 && fehrenheit < 87)
-                index += (((humidity - 85) / 10) * (87 - fehrenheit) / 5);
-            
+
+
 
             return index;
         }

@@ -10,20 +10,34 @@ namespace TempCalcsizeclasses
         {
             // Note: this .ctor should not contain any initialization logic.
         }
-
-        private bool humid = false;
+        
         private void compute(object sender, EventArgs args)
         {
-            if (humid)
+			//check for empty textfields so no errors occur
+            //when parsing
+			CheckEmpty();
+
+			if (HumiditySwitch.On)
                 ResultLabel.Text = String.Format("Result: {0} F",
                     Math.Round(calculate.getHeatIndex(Double.Parse(FahrenheitField.Text),
-                        Double.Parse(HumidityField.Text) / 100)));
+                        Double.Parse(HumidityField.Text))));
 
             else
                 ResultLabel.Text = String.Format("Result: {0} F",
                    Math.Round(calculate.getWindChill(Double.Parse(FahrenheitField.Text),
                        (int)WindSlider.Value)));
         }
+
+        //checks for empty textboxes so it can parse correctly
+        //without throwing errors
+		private void CheckEmpty()
+		{
+			if (FahrenheitField.Text == String.Empty)
+			    FahrenheitField.Text = "0";
+
+			if (HumidityField.Text == String.Empty)
+                HumidityField.Text = "0";
+		}
 
         partial void switchActionSheet(UISwitch sender)
         {
@@ -33,14 +47,16 @@ namespace TempCalcsizeclasses
             var yesAction = UIAlertAction.Create("Yes, I'm Sure!", UIAlertActionStyle.Default,
                 (action) =>
                 {
-                    humid = HumidityField.Enabled = HumiditySwitch.On = HumiditySwitch.On;
+                    HumidityField.Enabled = HumiditySwitch.On;
+				    compute(sender, null);
                 });
 
 
             var noAction = UIAlertAction.Create("No way!", UIAlertActionStyle.Cancel,
                 (action) =>
                 {
-                    humid = HumidityField.Enabled = HumiditySwitch.On = !HumiditySwitch.On;
+                    HumidityField.Enabled = HumiditySwitch.On = !HumiditySwitch.On;
+					compute(sender, null);
                 });
 
             controller.AddAction(yesAction);
@@ -65,37 +81,24 @@ namespace TempCalcsizeclasses
             {
                 FahrenheitField.ResignFirstResponder();
                 HumidityField.ResignFirstResponder();
-
-                if (FahrenheitField.Text == String.Empty)
-                    FahrenheitField.Text = "0";
-
-                if (HumidityField.Text == String.Empty)
-                    HumidityField.Text = "0";
             }));
 
-            HumidityField.EditingDidEnd += (sender, e) =>
-            {
-                compute(sender, e);
-            };
-
-            FahrenheitField.EditingDidEnd += (sender, e) =>
-            {
-                compute(sender, e);
-            };
+            //after editing, compute 
+			HumidityField.EditingDidEnd += compute;
+			FahrenheitField.EditingDidEnd += compute;
+			HumiditySwitch.ValueChanged += compute;
 
             //when slider value is changed, update UI
             WindSlider.ValueChanged += (sender, e) =>
             {
                 WindSpeedLabel.Text = String.Format("Wind Speed (0-100 mph): {0}",
                                         (int)WindSlider.Value);
-
-                //make sure text isnt empty
-                if (FahrenheitField.Text == String.Empty)
-                    FahrenheitField.Text = "0";
+              
                 compute(sender, e);
             };
         }
 
+       
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();

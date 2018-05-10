@@ -88,6 +88,9 @@
     <ImageAsset Include="Assets.xcassets\sunny.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Thermometer 120.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Thermometer 180.png" />
+    <ImageAsset Include="Assets.xcassets\sunny.imageset\sunny icon 1x.jpeg" />
+    <ImageAsset Include="Assets.xcassets\sunny.imageset\sunny 2x.jpeg" />
+    <ImageAsset Include="Assets.xcassets\sunny.imageset\sunny 3x.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
